@@ -1,4 +1,9 @@
-[workspace]
+[package]
+name = "advent_of_code_2023"
+version = "0.1.0"
+edition = "2021"
+authors = ["Adrian Wowk <dev@adrianwowk.com>"]
+publish = false
 
-members = ["day-01"]
-resolver = "2"
+[dependencies]
+rayon = "1.8.0"
