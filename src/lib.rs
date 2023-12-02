@@ -59,7 +59,7 @@ pub enum Part {
 
 pub fn read_input_file(day: u32) -> String {
     let path = format!("data/inputs/{:02}.txt", day);
-    std::fs::read_to_string(path).unwrap()
+    std::fs::read_to_string(path).unwrap().trim().to_string()
 }
 
 pub fn read_example_file(day: u32, part: Part) -> (u32, String) {
