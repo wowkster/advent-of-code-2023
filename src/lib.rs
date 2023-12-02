@@ -68,7 +68,7 @@ pub fn read_example_file(day: u32, part: Part) -> (u32, String) {
         .unwrap_or_else(|_| panic!("Example file not found: {}", path));
 
     let (expected_result, input) = file
-        .split_once("\n===\n")
+        .split_once("\n---\n")
         .expect("Example file is not in the correct format");
 
     let expected_result = expected_result
