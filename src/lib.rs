@@ -10,8 +10,12 @@ macro_rules! solution {
 
         fn main() {
             let input = read_input_file(DAY);
-            println!("Part 1: {:?}", part_1(&input));
-            println!("Part 2: {:?}", part_2(&input));
+            
+            let start_time = std::time::Instant::now();
+            println!("Part 1: {:?} (in {:.2?})", part_1(&input), start_time.elapsed());
+            
+            let start_time = std::time::Instant::now();
+            println!("Part 2: {:?} (in {:.2?})", part_2(&input), start_time.elapsed());
         }
 
         #[cfg(test)]
