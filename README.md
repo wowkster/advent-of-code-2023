@@ -1,5 +1,11 @@
 # Advent of Code 2023
 
+![GitHub License](https://img.shields.io/github/license/wowkster/advent-of-code-2023?color=blue)
+
+<p align="center">
+    <img src="./.assets/christmas_ferris.png" width="250">
+</p>
+
 This is my implementation of the [Advent of Code](https://adventofcode.com/) programming challenges in Rust.
 
 ## Results
