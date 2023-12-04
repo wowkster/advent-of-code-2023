@@ -1,6 +1,7 @@
 #[macro_export]
 macro_rules! solution {
     ($day:expr) => {
+        #[cfg(feature = "bench")]
         extern crate test;
 
         use advent_of_code_2023::{read_example_file, read_input_file, Part};
@@ -15,6 +16,7 @@ macro_rules! solution {
 
         #[cfg(test)]
         mod tests {
+            #[cfg(feature = "bench")]
             use test::{black_box, Bencher};
 
             use super::*;
@@ -35,12 +37,14 @@ macro_rules! solution {
                 assert_eq!(result, Some(expected_result));
             }
 
+            #[cfg(feature = "bench")]
             #[bench]
             fn bench_part_1(b: &mut test::Bencher) {
                 let input = read_input_file(DAY);
                 b.iter(|| black_box(part_1(&input)));
             }
 
+            #[cfg(feature = "bench")]
             #[bench]
             fn bench_part_2(b: &mut test::Bencher) {
                 let input = read_input_file(DAY);
