@@ -1,6 +1,7 @@
 # Advent of Code 2023
 
 ![GitHub License](https://img.shields.io/github/license/wowkster/advent-of-code-2023?color=blue)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/wowkster/advent-of-code-2023/badge?ref=main&style=flat)](https://actions-badge.atrox.dev/wowkster/advent-of-code-2023/goto?ref=main)
 
 <p align="center">
     <img src="./.assets/christmas_ferris.png" width="250">
