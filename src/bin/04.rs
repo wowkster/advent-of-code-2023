@@ -2,7 +2,7 @@
 
 advent_of_code_2023::solution!(4);
 
-use std::{collections::HashMap, sync::Mutex};
+use std::collections::HashMap;
 
 use nom::{
     bytes::complete::{tag, take_while_m_n},
@@ -17,35 +17,36 @@ use rayon::prelude::*;
 pub fn part_1(input: &str) -> Option<u32> {
     let cards = parse_cards(input);
 
-    let sum = cards.iter().map(Card::score).sum();
-
-    Some(sum)
+    Some(cards.iter().map(Card::score).sum())
 }
 
 #[inline]
 pub fn part_2(input: &str) -> Option<u32> {
-    // UNOPTIMIZATION: For the benchmark to be fair, we must ensure that the cache
-    // is cleared between iterations
-    COPIES_CACHE.lock().unwrap().clear();
-
     let original_cards = parse_cards(input);
 
-    let total_cards = original_cards
-        .par_iter()
-        .map(|c| c.count_copies(&original_cards))
-        .sum::<u32>();
+    let mut solution: HashMap<u32, u32> = HashMap::new();
 
-    Some(total_cards)
+    original_cards.iter().for_each(|card| {
+        // Include the original counts for each card id
+        *solution.entry(card.id).or_insert(0) += 1;
+
+        // Get the current count for the card
+        let current_amount = solution[&card.id];
+
+        // For each match, add our current amount to that card. This works becauase
+        // adding the current amount is like iterating it but cheaper.
+        for i in 0..card.matches {
+            *solution.entry(card.id + 1 + i).or_insert(0) += current_amount;
+        }
+    });
+
+    Some(solution.values().sum())
 }
 
 #[derive(Debug, Clone)]
 struct Card {
     id: u32,
     matches: u32,
-}
-
-lazy_static::lazy_static! {
-    static ref COPIES_CACHE: Mutex<HashMap<u32, u32>> = Mutex::default();
 }
 
 impl Card {
@@ -65,37 +66,6 @@ impl Card {
         }
 
         2u32.pow(self.matches - 1)
-    }
-
-    pub fn count_copies(&self, original_cards: &[Card]) -> u32 {
-        // OPTIMIZATION: Caches the copies internally because the same card
-        // will always return the same number of new created cards
-
-        let cached_count = COPIES_CACHE.lock().unwrap().get(&self.id).copied();
-
-        if let Some(res) = cached_count {
-            res
-        } else {
-            let res = self.count_copies_uncached(original_cards);
-
-            COPIES_CACHE.lock().unwrap().insert(self.id, res);
-
-            res
-        }
-    }
-
-    #[inline]
-    fn count_copies_uncached(&self, original_cards: &[Card]) -> u32 {
-        if self.matches == 0 {
-            return 1;
-        }
-
-        (0..self.matches)
-            .into_par_iter()
-            .map(|i| self.id + i)
-            .map(|c| original_cards[c as usize].count_copies(original_cards))
-            .sum::<u32>()
-            + 1
     }
 }
 
@@ -125,9 +95,7 @@ fn parse_card(input: &str) -> IResult<&str, Card> {
 }
 
 fn parse_int_list(input: &str) -> IResult<&str, Vec<u32>> {
-    let (input, ints) = separated_list0(space1, parse_int)(input)?;
-
-    Ok((input, ints))
+    separated_list0(space1, parse_int)(input)
 }
 
 fn parse_int(input: &str) -> IResult<&str, u32> {
