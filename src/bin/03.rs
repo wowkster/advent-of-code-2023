@@ -99,7 +99,11 @@ pub fn part_2(input: &str) -> Option<u32> {
                     if let Some(row_spans) = number_spans.get_mut(&i) {
                         row_spans.push(span);
                     } else {
-                        number_spans.insert(i, vec![span]);
+                        // OPTIMIZATION: we know that each line will have multiple
+                        // numbers so we can preallocate the vector with a larger size
+                        let mut v = Vec::with_capacity(16);
+                        v.push(span);
+                        number_spans.insert(i, v);
                     }
                 }
 
@@ -148,7 +152,9 @@ pub fn part_2(input: &str) -> Option<u32> {
         let min_row = star.row.saturating_sub(1);
         let max_row = star.row.saturating_add(1).min(lines.len() - 1);
 
-        let mut adjacent_spans = Vec::new();
+        // OPTIMIZATION: we know that each star will likely have no more than 4
+        // adjacent spans, so we can preallocate a vector with enough room
+        let mut adjacent_spans = Vec::with_capacity(4);
 
         for row in min_row..=max_row {
             let Some(span_row) = number_spans.get(&row) else {
@@ -159,7 +165,7 @@ pub fn part_2(input: &str) -> Option<u32> {
         }
 
         if adjacent_spans.len() == 2 {
-            sum += adjacent_spans.iter().map(|s| s.value).product::<u32>();
+            sum += adjacent_spans[0].value * adjacent_spans[1].value;
         }
     });
 
