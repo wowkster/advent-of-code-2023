@@ -1,3 +1,6 @@
+use std::str::FromStr;
+use std::fmt::Debug;
+
 #[macro_export]
 macro_rules! solution {
     ($day:expr) => {
@@ -10,12 +13,20 @@ macro_rules! solution {
 
         fn main() {
             let input = read_input_file(DAY);
-            
+
             let start_time = std::time::Instant::now();
-            println!("Part 1: {:?} (in {:.2?})", part_1(&input), start_time.elapsed());
-            
+            println!(
+                "Part 1: {:?} (in {:.2?})",
+                part_1(&input),
+                start_time.elapsed()
+            );
+
             let start_time = std::time::Instant::now();
-            println!("Part 2: {:?} (in {:.2?})", part_2(&input), start_time.elapsed());
+            println!(
+                "Part 2: {:?} (in {:.2?})",
+                part_2(&input),
+                start_time.elapsed()
+            );
         }
 
         #[cfg(test)]
@@ -70,7 +81,10 @@ pub fn read_input_file(day: u32) -> String {
     std::fs::read_to_string(path).unwrap().trim().to_string()
 }
 
-pub fn read_example_file(day: u32, part: Part) -> (u32, String) {
+pub fn read_example_file<T: FromStr>(day: u32, part: Part) -> (T, String)
+where
+    <T as FromStr>::Err: Debug,
+{
     let path = format!("data/examples/{:02}/part-{:01}.txt", day, part as u8);
     let file = std::fs::read_to_string(&path)
         .unwrap_or_else(|_| panic!("Example file not found: {}", path));
@@ -81,7 +95,7 @@ pub fn read_example_file(day: u32, part: Part) -> (u32, String) {
 
     let expected_result = expected_result
         .trim()
-        .parse::<u32>()
+        .parse::<T>()
         .expect("Expected result is not a number");
 
     let input = input.trim().to_string();
