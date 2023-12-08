@@ -20,6 +20,7 @@ This is my implementation of the [Advent of Code](https://adventofcode.com/) pro
 | [Day 5](https://adventofcode.com/2023/day/5) | :star: | :star: |
 | [Day 6](https://adventofcode.com/2023/day/6) | :star: | :star: |
 | [Day 7](https://adventofcode.com/2023/day/7) | :star: | :star: |
+| [Day 8](https://adventofcode.com/2023/day/8) | :star: | :star: |
 
 ## Benchmarks
 
@@ -34,6 +35,7 @@ The following benchmarks were created on a Macbook Pro with an M2 Pro processor:
 | [Day 5](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/05.rs) | `19.5µs`  | `55.2µs`  |
 | [Day 6](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/06.rs) | `0.21µs`  | `0.25µs`  |
 | [Day 7](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/07.rs) | `3.87ms`  | `5.12ms`  |
+| [Day 8](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/08.rs) | `0.619ms` | `3.01ms`  |
 
 ## Project Structure
 
