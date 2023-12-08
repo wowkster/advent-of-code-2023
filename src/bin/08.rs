@@ -9,6 +9,7 @@ use nom::{
     multi::{count, many1, separated_list0},
     IResult,
 };
+use rayon::prelude::*;
 
 advent_of_code_2023::solution!(8);
 
@@ -26,15 +27,18 @@ pub fn part_2(input: &str) -> Option<u64> {
 
     assert_eq!(input, "");
 
-    network
-        // Get all node ids
-        .keys()
-        // Find all the starting nodes
+    let steps = network
+        .par_iter()
+        // Get all node ids (no method for getting keys in parallel)
+        .map(|(k, _)| k)
+        // Find all the starting node ids
         .filter(|k| k.ends_with('A'))
         // Find the individual path for each node
         .map(|node| count_steps(&instructions, &network, node, |n| n.ends_with('Z')))
         // Find the LCM of all the paths to find the total step count
-        .reduce(num::integer::lcm)
+        .reduce(|| 1, num::integer::lcm);
+
+    Some(steps)
 }
 
 fn count_steps(

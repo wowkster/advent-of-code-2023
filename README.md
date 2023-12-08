@@ -35,7 +35,7 @@ The following benchmarks were created on a Macbook Pro with an M2 Pro processor:
 | [Day 5](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/05.rs) | `19.5µs`  | `55.2µs`  |
 | [Day 6](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/06.rs) | `0.21µs`  | `0.25µs`  |
 | [Day 7](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/07.rs) | `3.87ms`  | `5.12ms`  |
-| [Day 8](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/08.rs) | `0.619ms` | `3.01ms`  |
+| [Day 8](https://github.com/wowkster/advent-of-code-2023/blob/main/src/bin/08.rs) | `619.5µs` | `796.6µs` |
 
 ## Project Structure
 
