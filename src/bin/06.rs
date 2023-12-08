@@ -22,7 +22,6 @@ pub fn part_1(input: &str) -> Option<u64> {
     Some(product)
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u64> {
     let (input, race) = parse_input_as_single_race(input).unwrap();
 

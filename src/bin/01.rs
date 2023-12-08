@@ -4,12 +4,10 @@ advent_of_code_2023::solution!(1);
 
 use rayon::prelude::*;
 
-#[inline]
 pub fn part_1(input: &str) -> Option<u32> {
     Some(input.lines().map(extract_calibration_value_1).sum())
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u32> {
     Some(input.par_lines().map(extract_calibration_value_2).sum())
 }

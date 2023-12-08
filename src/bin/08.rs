@@ -21,7 +21,6 @@ pub fn part_1(input: &str) -> Option<u64> {
     Some(count_steps(&instructions, &network, "AAA", |n| n == "ZZZ"))
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u64> {
     let (input, (instructions, network)) = parse_input(input).unwrap();
 

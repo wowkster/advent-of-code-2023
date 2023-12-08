@@ -25,7 +25,6 @@ pub fn part_1(input: &str) -> Option<i64> {
     locations.min()
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<i64> {
     let (input, (seeds, maps)) = parse_input(input, parse_seed_range_list).unwrap();
 

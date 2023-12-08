@@ -21,7 +21,6 @@ pub fn part_1(input: &str) -> Option<u32> {
     Some(sum)
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u32> {
     let games = parse_games(input);
     let sum = games.iter().map(|g| g.minimum_set().power()).sum();

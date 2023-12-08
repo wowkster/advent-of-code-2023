@@ -9,7 +9,6 @@ use std::{
     sync::atomic::{AtomicU32, Ordering},
 };
 
-#[inline]
 pub fn part_1(input: &str) -> Option<u32> {
     let lines: Vec<_> = input.lines().collect();
 
@@ -68,7 +67,6 @@ pub fn part_1(input: &str) -> Option<u32> {
     Some(sum.load(Ordering::Acquire))
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u32> {
     let lines: Vec<_> = input.lines().collect();
 

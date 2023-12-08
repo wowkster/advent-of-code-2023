@@ -20,7 +20,6 @@ pub fn part_1(input: &str) -> Option<u32> {
     Some(cards.iter().map(Card::score).sum())
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u32> {
     let original_cards = parse_cards(input);
 

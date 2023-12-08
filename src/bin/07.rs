@@ -28,7 +28,6 @@ pub fn part_1(input: &str) -> Option<u64> {
     Some(sum)
 }
 
-#[inline]
 pub fn part_2(input: &str) -> Option<u64> {
     let (input, mut hands) = parse_input(input).unwrap();
 
